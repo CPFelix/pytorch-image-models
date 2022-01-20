@@ -6,6 +6,7 @@ from timm.data import resolve_data_config
 from timm.data.transforms_factory import create_transform
 import torch
 
+# v0.1-rsb-weights
 # TEST 8
 if __name__ == "__main__":
     # print models
