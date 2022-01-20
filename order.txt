@@ -1,0 +1,25 @@
+TRAIN
+
+bash ./distributed_train.sh 4 /home/chenpengfei/dataset/WXJS --model resnet50 --sched cosine --epochs 150 --warmup-epochs 5 --lr 0.4 --reprob 0.5 --remode pixel --batch-size 256 --amp -j 4 --input-size 3 128 128 --pretrained --log-wandb
+
+bash ./distributed_train.sh 4 /home/chenpengfei/dataset/WXJS --model efficientnet_b2 -b 128 --sched step --epochs 450 --decay-epochs 2.4 --decay-rate .97 --opt rmsproptf --opt-eps .001 -j 8 --warmup-lr 1e-6 --weight-decay 1e-5 --drop 0.3 --drop-connect 0.2 --model-ema --model-ema-decay 0.9999 --aa rand-m9-mstd0.5 --remode pixel --reprob 0.2 --amp --lr .016 --pretrained --log-wandb
+
+bash ./distributed_train.sh 4 /home/jinjicheng/datasets/DSMhands3 --model mobilenetv2_100 --sched cosine --epochs 150 --warmup-epochs 5 --lr 0.4 --reprob 0.5 --remode pixel --batch-size 256 --amp -j 4 --input-size 3 128 128 --pretrained --log-wandb  --num-classes 5 --dataset DSMhands4
+
+bash ./distributed_train.sh 4 /home/jinjicheng/datasets/DSMhands3 --model mobilenetv2_100 --sched cosine --epochs 150 --warmup-epochs 5 --lr 0.4 --reprob 0.5 --remode pixel --batch-size 256 --amp -j 4 --input-size 3 128 128 --pretrained --log-wandb  --num-classes 2 --dataset DSMhands5
+
+bash ./distributed_train.sh 4 /home/jinjicheng/datasets/DSMhands3 --model resnet50_cbam --sched cosine --epochs 150 --warmup-epochs 5 --lr 0.4 --reprob 0.5 --remode pixel --batch-size 256 --amp -j 4 --input-size 3 128 128 --pretrained --log-wandb  --num-classes 2 --dataset DSMhands5
+
+bash ./distributed_train.sh 4 /home/jinjicheng/datasets/DSMhands3 --model mobilenetv3_large_100 --sched cosine --epochs 150 --warmup-epochs 5 --lr 0.4 --reprob 0.5 --remode pixel --batch-size 256 --amp -j 4 --input-size 3 128 128 --pretrained --log-wandb  --num-classes 2 --dataset DSMhands5
+
+
+bash ./distributed_train.sh 4 /home/jinjicheng/datasets/DSMhands3 --model efficientnet_b0 -b 256 --sched step --epochs 450 --decay-epochs 2.4 --decay-rate .97 --opt rmsproptf --opt-eps .001 -j 8 --warmup-lr 1e-6 --weight-decay 1e-5 --drop 0.3 --drop-connect 0.2 --model-ema --model-ema-decay 0.9999 --aa rand-m9-mstd0.5 --remode pixel --reprob 0.2 --amp --lr .016 --input-size 3 128 128 --pretrained --log-wandb  --num-classes 2 --dataset DSMhands5
+
+
+bash ./distributed_train.sh 4 /home/chenpengfei/dataset/DSMhands6 --model mobilenetv2_100 --sched cosine --epochs 150 --warmup-epochs 5 --lr 0.4 --reprob 0.5 --remode pixel --batch-size 256 --amp -j 4 --input-size 3 128 128 --pretrained --log-wandb  --num-classes 2
+
+bash ./distributed_train.sh 4 /home/chenpengfei/dataset/DSMhands7 --model mobilenetv2_100 --sched cosine --epochs 150 --warmup-epochs 5 --lr 0.4 --reprob 0.5 --remode pixel --batch-size 256 --amp -j 4 --input-size 3 128 128 --pretrained --log-wandb  --num-classes 2
+
+INFERENCE
+
+python inference.py /home/chenpengfei/dataset/WXJS/validation/ --model seresnet34 --checkpoint ./output/train/20211222-171348-seresnet34-224/model_best.pth.tar
